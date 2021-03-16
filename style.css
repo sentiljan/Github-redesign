@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background-color: #25272e;
+}
+
+h1,h2,h3,h4,h5,h6,p,span{
+    color: #fff;
+}
+
+#form{
+    padding: 1em;
+    text-align: center;
+}
+
+#form input{
+    padding: 1em 2.5em;
+    color:#25272e ;
+    font-size: 1.1em;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0px 0px 15px 0px blanchedalmond;
+    outline: none;
+}
+
+header{
+    background-color: black;
+    margin-bottom: 50px;
+}
+
+header .contain{
+    display: flex;
+    width: 950px;
+    text-align: center;
+    margin: auto;
+    justify-content: space-between;
+}
+
+header .logo svg{
+    width: 40px;
+    height: 40px;
+    fill: #fff;
+}
+
+.logo{
+    display: flex;
+    align-items: center;}
+
+main{
+    margin: auto;
+    padding: 1em;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+main *{
+    max-width: 100%;
+}
+
+main .col-1{
+    width:30%;
+}
+
+main .col-1 img{
+    border-radius: 8px;
+}
+
+main .bio{
+    opacity: 0.8;
+    font-size: 0.9em;
+}
+
+main .col-2{
+    width: 70%;
+}
+
+main .col-2 ul li{
+    display: inline;
+    margin-right: 15px;
+    color: #fff;
+    padding: 3px 7px;
+    cursor: pointer;
+}
+
+.overview ul li.active{
+    background: #38415f;
+    border-radius: 5px;
+}
+
+main .col-2 ul li span{
+   background: #474b59;
+   padding:2px 4px;
+   font-size: 0.8em;
+   border-radius: 2px;
+}
+
+.repos{
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.repos p{
+    margin: 0;
+}
+
+.activity{
+    margin-left: 40px;
+    margin-top: 30px;
+}
+
+#repos a{
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 45% !important;
+    padding: 1.5em 1em;
+    background:linear-gradient(to right, #2c4ab7,#3e79de);
+    transition: all .3s ease-in-out;
+}
+
+#repos a:hover{
+    color: #fff;
+    background:linear-gradient(to left, #2c4ab7,#3e79de);
+    transition: all .3s ease-in-out;
+}
+
+.followBtn{
+    background: linear-gradient(to bottom , #3d77dc,#3562cb);
+    width: 100%;
+    color: #fff;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.contribution {
+    height: fit-content;
+}
+
+.company{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; 
+    text-decoration: none; 
+    width: 100%;
+}
+
+.company svg{
+    margin-bottom: -4px;
+    width: 24px;
+    margin-right: 10px;
+    color: blanchedalmond;
+}
+
+.web{
+    width: 100%;
+    color: #4283e5;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; 
+    text-decoration: none; 
+}
+
+.web svg{
+    margin-bottom: -4px;
+    width: 24px;
+    margin-right: 10px;
+    color: blanchedalmond;
+}
+
+svg rect {
+    fill: blue !important;
+}
+
+.tabContent{
+    display: none;
+}
