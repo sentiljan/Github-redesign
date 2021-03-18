@@ -12,11 +12,12 @@ async function getUser(username){
     showUser(respData);
     getRepos(username);
     changeColor();
-    console.log(respData);
+    console.log(respData)
+
 }
 
 function showUser(user){
-const mainBody = `
+    const mainBody = `
     <div class="col-1">
         <img src="${user.avatar_url}" /> 
         <h4>${user.name}</h4>
@@ -83,10 +84,12 @@ const mainBody = `
 }
 
 async function getRepos(username){
-    const resp = await fetch(APIURL + username + "/repos");
+    const resp = await fetch(APIURL + username + "/repos?per_page=100");
     const respData = await resp.json();
 
     addReposToCard(respData);
+    SetupPagination(respData, pagination_element, rows);
+
 }
 
 function addReposToCard(repos) {
@@ -94,17 +97,19 @@ function addReposToCard(repos) {
 
     repos
         .sort((a, b) => b.stargazers_count - a.stargazers_count)
-        .slice(0, 6)
+.slice(0, 6)
         .forEach((repo) => {
-            const repoEl = document.createElement("a");
-            repoEl.classList.add("repo");
+        const repoEl = document.createElement("a");
+    repoEl.classList.add("repo");
 
-            repoEl.href = repo.html_url;
-            repoEl.target = "_blank";
-            repoEl.innerText = repo.name;
+    repoEl.href = repo.html_url;
+    repoEl.target = "_blank";
+    repoEl.innerText = repo.name;
 
-            reposEl.appendChild(repoEl);
-        });
+    reposEl.appendChild(repoEl);
+});
+
+
 }
 
 function changeTab(evt, tabName) {
@@ -125,25 +130,23 @@ function changeTab(evt, tabName) {
     evt.currentTarget.className += " active";
 
 
-}    
+}
 
 
 
 function changeColor() {
-    
+
     var svgEl = document.querySelector("#contri");
-    
-      
+
+
     svgEl.addEventListener("load", (e) => {
         e.preventDefault();
-        var as = document.querySelectorAll("rect");
-        as.forEach((e) => {
-            e.style.fill= "#000"
-        });
-        console.log(as.length);
+    var as = document.querySelectorAll("rect");
+    as.forEach((e) => {
+        e.style.fill= "#000"
+});
 
-    });
-    console.log(svgEl);
+});
 
     return svgEl;
 }
@@ -151,13 +154,75 @@ function changeColor() {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const user = search.value;
+const user = search.value;
 
-    if (user) {
-        getUser(user);
+if (user) {
+    getUser(user);
 
-        search.value = "";
-    }
+    search.value = "";
+}
 });
+const pagination_element = document.getElementById('pagination');
+
+let current_page = 1;
+var rows = 6;
+
+function DisplayList (items, wrapper, rows_per_page, page) {
+    const list_element = document.getElementById('repos');
+
+
+    list_element.innerHTML = "";
+    page--;
+
+    let start = rows_per_page * page;
+    let end = start + rows_per_page;
+    let paginatedItems = items.slice(start, end);
+
+    for (let i = 0; i < paginatedItems.length; i++) {
+        let item = paginatedItems[i];
+        const item_element = document.createElement("a");
+        item_element.classList.add("repo");
+
+        item_element.href = item.html_url;
+        item_element.target = "_blank";
+        item_element.innerText = item.name;
+
+        list_element.appendChild(item_element);
+
+    }
+
+
+}
+
+function SetupPagination (items, wrapper, rows_per_page) {
+    wrapper.innerHTML = "";
+
+    let page_count = Math.ceil(items.length / rows_per_page);
+    for (let i = 1; i < page_count + 1; i++) {
+        let btn = PaginationButton(i, items);
+        wrapper.appendChild(btn);
+    }
+}
+
+function PaginationButton (page, items) {
+    let button = document.createElement('button');
+    button.innerText = page;
+
+    if (current_page == page) button.classList.add('active');
+
+    button.addEventListener('click', function () {
+        current_page = page;
+        DisplayList(items, main, rows, current_page);
+
+        let current_btn = document.querySelector('.pagenumbers button.active');
+        current_btn.classList.remove('active');
+
+        button.classList.add('active');
+    });
+
+    console.log("this is the "+ items.length);
+
+    return button;
+}
 
 getUser();
